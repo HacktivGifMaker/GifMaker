@@ -8,4 +8,6 @@ router.post('/upload', multer.single('userPhoto'), sendUploadToGCS)
 
 router.post('/', controller.gifConvert)
 
+router.post('/', controller.gifConvert)
+
 module.exports = router;

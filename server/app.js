@@ -14,8 +14,11 @@ app.use(cors())
 app.use(logger('dev'))
 app.use(express.json({limit:'100mb'}));
 app.use(express.urlencoded({ extended: false }));
+<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, 'public')));
 
+=======
+>>>>>>> 60f7160ba45e5d87c7218a1ea8f91e78efdbca04
 app.use(cors())
 
 app.use('/', indexRouter);

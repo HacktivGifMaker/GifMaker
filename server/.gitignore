@@ -1,4 +1,8 @@
 node_modules
+<<<<<<< HEAD
 keyfile.json
 git rm -r --cached keyfile.json
 .env
+=======
+.env
+>>>>>>> 60f7160ba45e5d87c7218a1ea8f91e78efdbca04
