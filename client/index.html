@@ -28,21 +28,19 @@
             fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
     </script>
+    
+    <!-- //NOTE: MAIN APP -->
     <main id="app">
         <div class="container-fluid">
             <div class="row" id="logo">
                 <div class="col-12">
-                    <h1>Logo goes here</h1>
+                    <h1>Hacktiv Gif Maker</h1>
                 </div>                                
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <input type="file" name="imageFile" value="Upload file">
-                </div>
-            </div>
+            </div>            
+            <upload @get-link="collectImgPath"> </upload>                
             <div class="row">
                 <div class="col-12" id="userPhoto">
-                    <img name="userPhoto" v-for="image in userPhoto" v-bind:src="image" alt="" srcset="">                  
+                    <img name="userPhoto" v-for="image in imagesUrlGCP" v-bind:src="image" alt="" srcset="">                  
                 </div>
             </div>
             <div class="row">
@@ -74,14 +72,60 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 <script>
+    // Belum bind value file ke dalam state di child & kirim ke parent untuk di process
+    //NOTE: VUE COMPONENT
+    Vue.component('upload',{
+        template:`
+            <div class="row">
+                <div class="col-12">
+                    <form v-on:submit.prevent="submitPic" enctype="multipart/form-data">
+                        <input @change="fileInputEvent($event)" type="file" name="file">
+                        <input type="submit" value="Upload Image" name="submit">
+                    </form>                    
+                </div>
+            </div>
+        `,
+        data: function(){
+            return{
+                imageUrl: "",
+            }
+        },
+        methods:{
+            fileInputEvent(event){                                           
+                console.log(event.target.files[0])
+                this.imageUrl = event.target.files[0];
+            },
+            submitPic(){
+                let image = new FormData();
+                image.append('userPhoto', this.imageUrl);
+                axios({
+                    url: 'http://localhost:3000/upload',
+                    method: 'POST',
+                    data: image,
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(response => {
+
+                    this.$emit('get-link', response.link)
+                }).catch(err => {
+                    alert(err.message)
+                })
+            }
+        }
+    })
     var app = new Vue({
         el: '#app',
         data: {
-            userPhoto: ["https://images.unsplash.com/photo-1475522003475-eb5f96f1f930?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1475522003475-eb5f96f1f930?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1475522003475-eb5f96f1f930?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"],
+            imagesUrlGCP: [],
             userText: 'Text input by user',
-            gifResult: "https://images.unsplash.com/photo-1475522003475-eb5f96f1f930?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            gifResult: "",
         },
-        methods:{}
+        methods:{
+            collectImgPath(){
+                this.imagesUrlGCP.push(link)
+            }
+        }
     })
 </script>
 </html>
