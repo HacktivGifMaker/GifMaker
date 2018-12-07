@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hacktiv-gyf-maker",
+  "private_key_id": "f20337c4eb25306cad6c1c7fc2a39b09d566e759",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCjQ0RI8HvKQALI\nu4lDAe4y32pt7JRRgh1oWKV8LSAftfre2JVDIR8syF8yXT8EjLygkupuVlMH1vEQ\nwgNre4D2qMZqm9xKinBwhZ6Fut21K5r85l5tf9TCIzyYxS4gllnPd1JkpfhGHO8M\nx8ZjDUKRCWV7um7dbgkKzc73bgR+zstIqLIyZ8/h0dolmMr5t+ucwlXuhNvhtb9W\nv4eRduOiFy4bv8WXVF5qBG9JMDqbDIlYYGYmGms6QJWQToUXHcuAiJIHirhmWewB\nOdZRKkAMOSiHDHMmcYU3OV/xt9FeiqaMVJr3TA7nuKW+QiA5mtN6zQuHwdoBvYN/\nIJoaDEV/AgMBAAECggEAAQLQdZqA9xJ+EevQtfNZRsO0admDskeEfW9twumX9SpQ\nKI4dyoHLgCBThUEnkT8lMeIHBUeP5xCxLcyNxIjKFnzwEZvvzsmxrY4I78S6971n\n4yCyvVSD0Znx7POXorMGUQRo+bTqEdZpsoy60UU1QCcB6QoRWASvlftf8zn2rtRV\ndgoo7NEMB856LC7GaFZ0FTxJbYD7GWL/cgHWhvHM8fkqXJCOosbDRbxyU8oMS4Uc\nem9xP9590ObGv/UzcRZYzo+prjKmyoqpjtvOekdLVUoCm+t/zKqVfrxwxGbcvCn8\nB5wlJr9n771XgvPqMCHsd93dIdGOjJrxtGy8ghG7/QKBgQDaKJEjBdQXmz/0z5d+\nMEjarjVRlcic5k+3BW8TiMgQ/EMD1eumcL23kUtHm6DDwdfWTM8bF/4ThNSI7Dom\nPBt05Q05BA8tTI8fylDM3u1GtRUfdS49ga370sEmnMkO2fLaw4oFPIDUSZh2G8ub\ns6XR6GSkQGo5nYsz4ESp2BKx7QKBgQC/lQd+/5j3w3at71Kdxg1XkUZDqfS+LAOg\n3PaK4ULrmhbRmu7N4eUn2JXKRpu2M3gyOjEVqT2ohMrIyYnDSVKESxLnIwYC1L+y\nINADZmWXF9gWkirseK5ofnpt/3uNaLMCLxS/2cWlV2fVdFsYGc8zHeu3Rny3hg29\nQJdvEO9XmwKBgF1n2RyBtlmVI0ESUO66hbb7t+CCnS5wfdkC/pgCjIaZO6g8w3Sz\n+MbL8stqGt8188/ReytCjoqU6NrnKc6NFcRq/cpXrpfam70kxouxNy57AdxCM9Yp\n2/BiQEjkAEHXl1+LMWEkkpRSHnETXY4A0RKaydx5qAGbLqq7byq5VOfRAoGAYizM\nmpgAm3be6mMpwxAq5iTcDPCbKpkDgvu4m5Kz6GgeKWtr1LVd6P1kRTPJt6TIg3Su\nkpsXrbPe9uXQYvLABmsyVJ/uBKVhVrbZ4eQnSzY81dQxityNA59MvfGeLujoUsYt\nq+K9Fe2kmA34YHFZbKh4koLchm97uu/OqmvTOuECgYBK2PVzrIR7qXxFH3lliYId\n+D7qQpVC/WxQ4c5LcrNR8+e6pS8PDyu5Arnk9sqfLjSeAnSFgBtKBIEubQSsl9XI\n19QHojXp9mancEk3q5jn53XWrYZ1XX/OAEkRjaSaU0dKCuajaQ9Tvm4Xsiy1MMuE\nNmCpVqQ0SQ/5AS5oVQFZkQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "groupadmin@hacktiv-gyf-maker.iam.gserviceaccount.com",
+  "client_id": "101781670775762664716",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/groupadmin%40hacktiv-gyf-maker.iam.gserviceaccount.com"
+}

@@ -7,20 +7,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <div id="app">
 
-    </div>
+    <!-- Ini sih buat ngecheck jalan apa ga-->
+    <upload @get-link="collectImgPath> </upload>
+    <!-- <div id="app">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload Image" name="submit">
+        </form>
+    </div> -->
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 <script>
+    // Belum bind value file ke dalam state di child & kirim ke parent untuk di process
+    Vue.component('upload',{
+        template:`
+            <form v-on:submit.prevent="submitPic(imageUrl)" enctype="multipart/form-data">
+                <input v-model="imageUrl" type="file" name="file">
+                <input type="submit" value="Upload Image" name="submit">
+            </form>
+        `,
+        data: function(){
+            return{
+                imageUrl: "",
+            }
+        },
+        methods:{
+            submitPic(url){
+                axios({
+                    url: 'http://localhost:3000/upload',
+                    method: 'POST',
+                    data: {
+                        userPhoto: url
+                    }
+                }).then(response => {
+
+                    this.$emit('get-link', response.link)
+                }).catch(err => {
+                    alert(err.message)
+                })
+            }
+        }
+    })
     var app = new Vue({
         el: '#app',
         data: {
-            message: 'Hello Vue!'
+            message: 'Hello Vue!',
+            imagePath: []
         },
-        methods:{}
+        methods:{
+            collectImgPath(){
+                this.imagePath.push(link)
+            }
+        }
     })
 </script>
 </html>
