@@ -11,16 +11,13 @@ Vue.component('gif-converter', {
         cobaCamera() {
             const self = this
             this.loading = true
-            this.gifImg=''
+            this.gifImg = ''
             gifshot.createGIF({
                 'gifWidth': 500,
                 'gifHeight': 500,
-            },function (obj) {
+            }, function (obj) {
                 if (!obj.error) {
                     let image = obj.image
-                    // animatedImage = document.createElement('img');
-                    // animatedImage.src = image;
-                    // document.body.appendChild(animatedImage);
                     axios({
                         method: 'POST',
                         url: 'http://localhost:3000',
@@ -42,7 +39,7 @@ Vue.component('gif-converter', {
         convertGif() {
             this.loading = true
             const self = this
-            this.gifImg=''
+            this.gifImg = ''
             gifshot.createGIF({
                 'images': self.img,
                 'gifWidth': 500,
@@ -53,8 +50,6 @@ Vue.component('gif-converter', {
             }, function (obj) {
                 if (!obj.error) {
                     var image = obj.image
-                    //     animatedImage = document.createElement('img');
-                    // animatedImage.src = image;
                     axios({
                         method: 'POST',
                         url: 'http://localhost:3000',
@@ -76,8 +71,8 @@ Vue.component('gif-converter', {
     },
     template: `
         <div class="col mt-5">
-            <button class="btn btn-info mr-5" @click="convertGif">Convert picture</button>
-            <button class="btn btn-info" @click="cobaCamera">Use Camera</button>
+            <button class="btn btn-dark mr-5" @click="convertGif">Convert picture</button>
+            <button class="btn btn-dark" @click="cobaCamera">Use Camera</button>
             <br>
             <img :src="gifImg" alt="">
             <img v-if="loading == true" src="https://i.redd.it/ounq1mw5kdxy.gif" alt="">
