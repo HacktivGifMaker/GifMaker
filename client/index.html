@@ -71,7 +71,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 <script>
-    // Belum bind value file ke dalam state di child & kirim ke parent untuk di process
     //NOTE: VUE COMPONENT
     Vue.component('upload',{
         template:`
@@ -105,7 +104,8 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then(response => {
-                    this.$emit('get-link', response.link)
+                    console.log(response,"ini response dari axios abis iupload GCP")
+                    this.$emit('get-link', response.data.link)
                 }).catch(err => {
                     alert(err.message)
                 })
@@ -120,8 +120,9 @@
             gifResult: "",
         },
         methods:{
-            collectImgPath(){
-                this.imagesUrlGCP.push(link)
+            collectImgPath(link){
+                console.log(link, "ini link dari collectImgPath")
+                this.imagesUrlGCP.push({link, userTextInput: this.userText})
             }
         }
     })
