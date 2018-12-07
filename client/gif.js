@@ -76,6 +76,7 @@ Vue.component('gif-converter', {
             <br>
             <img :src="gifImg" alt="">
             <img v-if="loading == true" src="https://i.redd.it/ounq1mw5kdxy.gif" alt="">
+            <div id="shareBtn" class="fb-share-button" v-bind:data-href="gifImg" data-layout="button" data-size="large" data-mobile-iframe="true">Share</div> 
         </div>
     `
 

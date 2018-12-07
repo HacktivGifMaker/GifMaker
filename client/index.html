@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"> 
     <link rel="stylesheet" href="style.css">
+
+    <meta property="og:url"           content="https://storage.googleapis.com/hacktiv-gyf-maker/5741544175564574" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="https://storage.googleapis.com/hacktiv-gyf-maker/5741544175564574" />
 </head>
 <body>
     <!-- //NOTE: FACEBOOK SDK -->
@@ -26,7 +32,7 @@
             js = d.createElement(s); js.id = id;
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
+        }(document, 'script', 'facebook-jssdk'));
     </script>
     
     <!-- //NOTE: MAIN APP -->
@@ -41,7 +47,7 @@
             <gallery id="imageGallery" :imagegallery="imagesUrlGCP"></gallery>                        
             <textinput id="textInput" v-if="imagesUrlGCP.length > 0" @text-from-user="editUserText"></textinput>            
             <!-- <gifresult id="result" v-if="userText" :urlgif="gifResult"></gifresult> -->
-            <gif-converter/>
+            <gif-converter :imginput="imagesUrlGCP"/>
         </div>
     </main>
 
@@ -86,7 +92,8 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then(response => {
-                    this.$emit('get-link', response.link)
+                    // console.log(response.data.link)
+                    this.$emit('get-link', response.data.link)
                 }).catch(err => {
                     alert(err.message)
                 })
@@ -98,7 +105,7 @@
         template: `        
             <div class="row">
                 <div class="col-12" id="userPhoto">
-                    <img name="userPhoto" v-for="image in imagegallery" v-bind:src="image" alt="" srcset="">                  
+                    <img name="userPhoto" v-for="image in imagegallery" v-bind:src="image.src" alt="" srcset="">                  
                 </div>
             </div>
         `,
@@ -147,9 +154,9 @@
                     <div class="col-3"></div>                
                 </div>
     
-                <div id="shareBtn" class="fb-share-button" v-bind:data-href="urlgif" data-layout="button" data-size="large" data-mobile-iframe="true">Share</div>        
+                <div id="shareBtn" class="fb-share-button" data-href="https://storage.googleapis.com/hacktiv-gyf-maker/5741544175564574" data-layout="button" data-size="large" data-mobile-iframe="true">Share</div>        
             </div>
-        `
+        ` 
     });
     Vue.component('customfooter', {
         template: `
@@ -170,7 +177,7 @@
         methods:{
             collectImgPath(link){
                 console.log(link, "ini link dari collectImgPath")
-                this.imagesUrlGCP.push({link, userTextInput: this.userText})
+                this.imagesUrlGCP.push({src: link, text: this.userText})
             },
             editUserText(usertext){
                 this.userText = usertext;

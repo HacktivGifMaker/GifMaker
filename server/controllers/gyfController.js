@@ -17,7 +17,7 @@ module.exports = {
         if (!req.file) {
             return next()
         }
-        const gcsname = Date.now() + "-" + req.file.originalname
+        const gcsname = Date.now() + "-"
         const file = bucket.file(gcsname)
 
         const stream = file.createWriteStream({
