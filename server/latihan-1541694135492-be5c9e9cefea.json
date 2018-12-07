@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "latihan-1541694135492",
+  "private_key_id": "be5c9e9cefeae54240401d9d4f16305d64115676",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDCebz+UxtJBlv/\nZoL3pGKGWW4wyCnKb2wwtj7AJ9/vBS3GUFENx1TBVLTg91e3Udwla+watSA0c0gj\n4rKQqx9LC5oqOE+YSf/OVzPjjDUIvUMzS23ZuHVzVx/93NVh7whStBNkl/MtLtgF\n5pukgyOOXDQQJfWueuz/rNYzIdlDMcscStJo9BYI7su7iz8wMIoJScWiAn2zDLnl\nnHX7JcZSNSkskznZuL1lw6lvN+xTiTYBTBFpdB7gRD8UVWLhtZ5RXtUH8B0BQXuY\n/KR49WyXY9WOj1PZYUBeWQblzBLjszdYyZ8Lgb4YzMQ3lizjeFtV+zjjtrkVfGkV\n1DESsiSFAgMBAAECggEAAbcVJaESAojd0tjSmuCGRe0P/bomNDTbXWqeDw/K986x\n4qferyJs6u+WUM2dpm5AZMwY3vtt90h1AGwFayU3N3A4wdqRSSSN7wHx4TXhWdxh\ndVha9aqczpGcJJ8H+r8i8afI7AAzEtjw6sxn3wGRFLZXdzT+f7Vx1adulDDeO6t2\n0PqY/uy3darykwZvL75O2pPwZNnLfDbmdLhw2m3Pkf52NJ28Yd5Jk8lRnGC7GCFp\nZjbRKKmD4TtM33fvgGD5QCMiXGLMkSc9wGb6ctBh7sDRiYjh56NmdTUz/Rt47bcQ\npppPgqY9BCzblI8ik/3GkzqQD4V/Id0OsyBQcfpYGQKBgQDm2l5Tulh9L9Xkj+Ux\n26FP8lp+s/T6rQtR//sqDJmjveoCFEgqhAV1iwBblOayCZA3noyviNaDFwvXxsJ5\nqGwabrsrRVzcr2tQRfas0VXoEE6Exb9J58pf+0BfHGj7cXvSpH/eb4rWWGJr9tNj\n37YZPP4ArUjytmRT+h6f2dsNmwKBgQDXqPAMn60kouHgGJmOlI/ZJMGrkBKtidIp\nLBkR9/9Khv3/pEcTDacf9dOEBZIgOAhCwlHRuHSe/545yTrJMf1/2ZxbIp11fVON\nzrbA04uy+QU+BqI5jAdVC40NhIhHo9Mialb9Th/M/nplzGcK86hRmO2W9RMh5MSR\nCm4Bl0XIXwKBgH/tEIp7YB/3SyM+bjbjy49+8JD37lCfZf+Jx8g0dUtcqXl/fcI5\nqMDLR2Z4rCKK1CVOMg3v2VeJhOGM3iYGo+k95XCEHoKYnvI74wc/dciEiM5gurEc\nxnPLyo8qMi7sYz6GM+myjBBdqCTGAbx9su5ncyYy4JLHae9zUlcopY/zAoGAHIiG\nkjUCNIm0dvDqSDoRujopwahDQGCuxLHH81+rkFHCA3PZz4SL6yecP6h5B/hB54tM\nRgIws+TAK4cbVwldL/A7xrcSvDvDtUx3U5XpstlNv0Ijbpe/VJo9pF83pLrhMXl+\nXu9aN8YnrZZYv9MzHvCr5sAwMtjQxRvrKBy6p+MCgYBKUrIHZli2fj3A0Jx2VkEx\nS1fK7RHXXQlaPC4umh+yMmZ+qN5DYZhCVPQsJjbBuExNXisqJ3nGZ+EvvEsDgDrJ\navAZBwa+ZudgtrS9I5JKpzdQvuQwWv6mIhlOnlmhy1sZSBqoR1v97cmkEvLrKnM0\nc1CuAtIZViSo5l5ktZIuCQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "latihan@latihan-1541694135492.iam.gserviceaccount.com",
+  "client_id": "117398633925399538898",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/latihan%40latihan-1541694135492.iam.gserviceaccount.com"
+}
