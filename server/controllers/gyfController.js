@@ -14,6 +14,7 @@ const getPublicUrl = (filename) => {
 
 module.exports = {
     sendUploadToGCS: function(req, res, next) {
+        console.log("masuk ke sendUploadToGCS")
         if (!req.file) {
             return next()
         }

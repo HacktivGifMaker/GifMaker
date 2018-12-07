@@ -6,7 +6,13 @@ const {sendUploadToGCS} = require('../controllers/gyfController')
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-router.post('/upload', multer.single('userPhoto'), sendUploadToGCS)
+router.post('/upload', function(){
+console.log("sebelum multer"); 
+next();
+},
+multer.single('userPhoto'), function(){
+  console.log("masuk sini==="); console.log(req.files); next();
+}, sendUploadToGCS)
 
 
 module.exports = router;
