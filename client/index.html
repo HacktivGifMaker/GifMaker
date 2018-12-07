@@ -37,34 +37,12 @@
                     <h1>Hacktiv Gif Maker</h1>
                 </div>                                
             </div>            
-            <upload @get-link="collectImgPath"> </upload>                
-            <div class="row">
-                <div class="col-12" id="userPhoto">
-                    <img name="userPhoto" v-for="image in imagesUrlGCP" v-bind:src="image" alt="" srcset="">                  
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <input v-model="userText" type="text" name="captionText" id="">
-                    <button type="button" class="btn btn-info">Add Text</button>
-                </div>                
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <button type="button" class="btn btn-info">Convert to GIF!</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6">
-                    <h5 style="text-align: left">Result:</h5>
-                    <img v-bind:src="gifResult" alt="" srcset="">
-                </div>
-                <div class="col-3"></div>                
-            </div>
-  
-            <div id="shareBtn" class="fb-share-button" v-bind:data-href="gifResult" data-layout="button" data-size="large" data-mobile-iframe="true">Share</div>
+            <upload id="upload" @get-link="collectImgPath"> </upload>    
+            <gallery id="imageGallery" :imagegallery="imagesUrlGCP"></gallery>                        
+            <textinput id="textInput" v-if="imagesUrlGCP.length > 0" @text-from-user="editUserText"></textinput>            
+            <gifresult id="result" v-if="userText" :urlgif="gifResult"></gifresult>
         </div>
+        <customfooter id="footer"></customfooter>
     </main>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -77,8 +55,8 @@
             <div class="row">
                 <div class="col-12">
                     <form v-on:submit.prevent="submitPic" enctype="multipart/form-data">
-                        <input @change="fileInputEvent($event)" type="file" name="file">
-                        <input type="submit" value="Upload Image" name="submit">
+                        <input id="browse" class="form-control-file" @change="fileInputEvent($event)" type="file" name="file">
+                        <input id="submit" type="submit" value="Upload Image" name="submit" class="btn btn-outline-dark">                        
                     </form>                    
                 </div>
             </div>
@@ -89,8 +67,7 @@
             }
         },
         methods:{
-            fileInputEvent(event){                                           
-                console.log(event.target.files[0])
+            fileInputEvent(event){
                 this.imageUrl = event.target.files[0];
             },
             submitPic(){
@@ -104,25 +81,94 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then(response => {
-                    console.log(response,"ini response dari axios abis iupload GCP")
-                    this.$emit('get-link', response.data.link)
+                    this.$emit('get-link', response.link)
                 }).catch(err => {
                     alert(err.message)
                 })
             }
         }
-    })
+    });
+    Vue.component('gallery', {
+        props: ['imagegallery'],
+        template: `        
+            <div class="row">
+                <div class="col-12" id="userPhoto">
+                    <img name="userPhoto" v-for="image in imagegallery" v-bind:src="image" alt="" srcset="">                  
+                </div>
+            </div>
+        `,
+        data: function(){
+            return {
+
+            }
+        }
+    });
+    Vue.component('textinput', {
+        template: `        
+            <div class="row">
+                <div class="col-12">
+                    <input v-model="userText" type="text" name="captionText" id="" placeholder="Input your text here">
+                    <button v-on:click.prevent="addText" type="button" class="btn btn-dark">Add Text</button>
+                </div>                
+            </div>        
+        `,
+        data: function(){
+            return {
+                userText: ""
+            }
+        },
+        methods: {
+            addText: function() {
+                this.$emit('text-from-user', this.userText);
+            }
+        }
+    });
+    Vue.component('gifresult', {
+        props: ['urlgif'],
+        template: `
+            <div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-dark">Convert to GIF!</button>
+                        <button type="button" class="btn btn-dark">Use Camera!</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <h5 style="text-align: left">Result:</h5>
+                        <img id="gifresult" v-bind:src="urlgif" alt="" srcset="">
+                    </div>
+                    <div class="col-3"></div>                
+                </div>
+    
+                <div id="shareBtn" class="fb-share-button" v-bind:data-href="urlgif" data-layout="button" data-size="large" data-mobile-iframe="true">Share</div>        
+            </div>
+        `
+    });
+    Vue.component('customfooter', {
+        template: `
+        <div class="row">
+            <div class="col-12">
+                <p>Copyright @ Hacktiv8 2018</p>
+            </div>
+        </div>
+        `
+    });
     var app = new Vue({
         el: '#app',
         data: {
-            imagesUrlGCP: [],
-            userText: 'Text input by user',
-            gifResult: "",
+            imagesUrlGCP: ["https://images.unsplash.com/photo-1526715058896-23f69a067d99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1542919242-b32f2a7bce8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1542931415-162aeab4418f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"],
+            userText: "tes",
+            gifResult: "https://images.unsplash.com/photo-1542856391-010fb87dcfed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
         },
         methods:{
             collectImgPath(link){
                 console.log(link, "ini link dari collectImgPath")
                 this.imagesUrlGCP.push({link, userTextInput: this.userText})
+            },
+            editUserText(usertext){
+                this.userText = usertext;
             }
         }
     })
