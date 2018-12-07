@@ -105,7 +105,6 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then(response => {
-
                     this.$emit('get-link', response.link)
                 }).catch(err => {
                     alert(err.message)
