@@ -1,14 +1,20 @@
 * {
     font-size: 16px;
     text-align: center;
+    box-sizing: border-box;
+}
+
+.container-fluid {
+    padding: 0;
+    margin-bottom: 50px;
 }
 h1 {
     font-family: 'Indie Flower', cursive;
 }
 
 #app, .container-fluid {
-    background-color: aquamarine;
-    width: 100%;
+    /* background-color: aquamarine; */
+    width: 100vw;
     height: 100vh;
 }
 
@@ -16,7 +22,14 @@ h1 {
     display: flex;
     align-items: center;
     height: 20%;
-    background-color: burlywood
+}
+h1 {
+    font-size: 7rem;
+}
+
+#upload {
+    padding-top: 7%;
+    /* background-color: burlywood */
 }
 
 #userPhoto {    
@@ -24,6 +37,43 @@ h1 {
     justify-content: space-evenly;
 }
 
-img {
+#userPhoto img {
     max-width: 25%;
+}
+
+#submit {
+    margin-top: 10px;
+}
+
+#imageGallery {
+    flex: 1 1 auto;
+}
+
+#upload, #imageGallery, #textInput{
+    margin-bottom: 30px;
+}
+
+#result {
+    margin-bottom: 50px;
+}
+
+#shareBtn {
+    margin-top: 10px;
+}
+
+#footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    background-color: #343a40;
+    margin-left: 0;    
+    height: 4%;
+    width: 100vw;
+    color: white;
+    position: fixed;
+    bottom: 0;
+}
+
+p {
+    margin-bottom: 0;
 }
