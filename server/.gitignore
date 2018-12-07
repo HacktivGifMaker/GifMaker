@@ -1,1 +1,4 @@
 node_modules
+keyfile.json
+git rm -r --cached keyfile.json
+.env

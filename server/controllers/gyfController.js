@@ -17,8 +17,7 @@ module.exports = {
         if (!req.file) {
             return next()
         }
-
-        const gcsname = Date.now() + "-" + req.file.originalname
+        const gcsname = Date.now() + "-"
         const file = bucket.file(gcsname)
 
         const stream = file.createWriteStream({
@@ -36,7 +35,6 @@ module.exports = {
             req.file.cloudStorageObject = gcsname
             file.makePublic().then(() => {
                 req.file.cloudStoragePublicUrl = getPublicUrl(gcsname)
-                // console.log(req.file, "===== ini file di sendUploadToGCS")
                 res.send({
                     status: 200,
                     message: 'Your file is successfully uploaded',
@@ -44,7 +42,7 @@ module.exports = {
                 })
             })
         })
-
+        
         stream.end(req.file.buffer)
     }
 }

@@ -5,39 +5,184 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Hacktiv Gif Maker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css">
+
+    <meta property="og:url"           content="https://storage.googleapis.com/hacktiv-gyf-maker/5741544175564574" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="https://storage.googleapis.com/hacktiv-gyf-maker/5741544175564574" />
 </head>
 <body>
-
-    <!-- Ini sih buat ngecheck jalan apa ga-->
-    <div id="app">
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <input type="submit" value="Upload Image" name="submit">
-        </form>
-    </div>
+    <!-- //NOTE: FACEBOOK SDK -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId            : '289240695034829',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v3.2'
+            });
+        };
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    
+    <!-- //NOTE: MAIN APP -->
+    <main id="app">
+        <div class="container-fluid">
+            <div class="row" id="logo">
+                <div class="col-12">
+                    <h1>Hacktiv Gif Maker</h1>
+                </div>                                
+            </div>            
+            <upload id="upload" @get-link="collectImgPath"> </upload>    
+            <gallery id="imageGallery" :imagegallery="imagesUrlGCP"></gallery>                        
+            <textinput id="textInput" v-if="imagesUrlGCP.length > 0" @text-from-user="editUserText"></textinput>            
+            <!-- <gifresult id="result" v-if="userText" :urlgif="gifResult"></gifresult> -->
+            <gif-converter :imginput="imagesUrlGCP"/>
+        </div>
+    </main>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <!-- convert gif js -->
+    <script src="gifshot.js"></script>
+    <script src="gif.js"></script>
+    
 </body>
 <script>
-    // Belum bind value file ke dalam state di child & kirim ke parent untuk di process
+    //NOTE: VUE COMPONENT
     Vue.component('upload',{
         template:`
-        <form v-on:submit="submitPic" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <input type="submit" value="Upload Image" name="submit">
-        </form>
+            <div class="row">
+                <div class="col-12">
+                    <form v-on:submit.prevent="submitPic" enctype="multipart/form-data">
+                        <input id="browse" class="form-control-file" @change="fileInputEvent($event)" type="file" name="file">
+                        <input id="submit" type="submit" value="Upload Image" name="submit" class="btn btn-outline-dark">                        
+                    </form>                    
+                </div>
+            </div>
         `,
+        data: function(){
+            return{
+                imageUrl: "",
+            }
+        },
         methods:{
-
+            fileInputEvent(event){
+                this.imageUrl = event.target.files[0];
+            },
+            submitPic(){
+                let image = new FormData();
+                image.append('userPhoto', this.imageUrl);
+                axios({
+                    url: 'http://localhost:3000/upload',
+                    method: 'POST',
+                    data: image,
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(response => {
+                    // console.log(response.data.link)
+                    this.$emit('get-link', response.data.link)
+                }).catch(err => {
+                    alert(err.message)
+                })
+            }
         }
-    })
+    });
+    Vue.component('gallery', {
+        props: ['imagegallery'],
+        template: `        
+            <div class="row">
+                <div class="col-12" id="userPhoto">
+                    <img name="userPhoto" v-for="image in imagegallery" v-bind:src="image.src" alt="" srcset="">                  
+                </div>
+            </div>
+        `,
+        data: function(){
+            return {
+
+            }
+        }
+    });
+    Vue.component('textinput', {
+        template: `        
+            <div class="row">
+                <div class="col-12">
+                    <input v-model="userText" type="text" name="captionText" id="" placeholder="Input your text here">
+                    <button v-on:click.prevent="addText" type="button" class="btn btn-dark">Add Text</button>
+                </div>                
+            </div>        
+        `,
+        data: function(){
+            return {
+                userText: ""
+            }
+        },
+        methods: {
+            addText: function() {
+                this.$emit('text-from-user', this.userText);
+            }
+        }
+    });
+    Vue.component('gifresult', {
+        props: ['urlgif'],
+        template: `
+            <div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-dark">Convert to GIF!</button>
+                        <button type="button" class="btn btn-dark">Use Camera!</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <h5 style="text-align: left">Result:</h5>
+                        <img id="gifresult" v-bind:src="urlgif" alt="" srcset="">
+                    </div>
+                    <div class="col-3"></div>                
+                </div>
+    
+                <div id="shareBtn" class="fb-share-button" data-href="https://storage.googleapis.com/hacktiv-gyf-maker/5741544175564574" data-layout="button" data-size="large" data-mobile-iframe="true">Share</div>        
+            </div>
+        ` 
+    });
+    Vue.component('customfooter', {
+        template: `
+        <div class="row">
+            <div class="col-12">
+                <p>Copyright @ Hacktiv8 2018</p>
+            </div>
+        </div>
+        `
+    });
     var app = new Vue({
         el: '#app',
         data: {
-            message: 'Hello Vue!'
+            imagesUrlGCP:[],
+            userText: "",
+            gifResult: "",
         },
-        methods:{}
+        methods:{
+            collectImgPath(link){
+                console.log(link, "ini link dari collectImgPath")
+                this.imagesUrlGCP.push({src: link, text: this.userText})
+            },
+            editUserText(usertext){
+                this.userText = usertext;
+            }
+        }
     })
 </script>
 </html>
